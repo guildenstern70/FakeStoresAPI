@@ -1,0 +1,4 @@
+applications:
+- name: fakestoresapi
+  buildpack: nodejs_buildpack
+  memory: 256M
