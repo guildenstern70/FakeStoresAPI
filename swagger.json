@@ -1,0 +1,124 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "A verification stores API",
+    "title": "Fake Stores API",
+    "version": "v1"
+  },
+  "host": "fakestoresapi.mybluemix.net",
+  "schemes": [
+    "http"
+  ],
+  "basePath": "/api",
+  "paths": {
+    "/version": {
+      "get": {
+        "summary": "Get version of API",
+        "responses": {
+          "200": {
+            "description": "Success response"
+          }
+        }
+      }
+    },
+    "/google/verify/applications/{packagename}/purchases/products/{productid}/tokens/{token}": {
+      "get": {
+        "summary": "Verify Android purchase",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "access_token",
+            "required": true,
+            "description": "Access token to access Google Play API",
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "packagename",
+            "type": "string",
+            "description": "The name of the package.",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "productid",
+            "type": "string",
+            "description": "The Product ID.",
+            "required": true
+          },
+          {
+            "in": "path",
+            "name": "token",
+            "type": "string",
+            "description": "The Token received from Google store upon purchase",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response"
+          },
+          "400": {
+            "description": "Parameters missing"
+          }
+        }
+      }
+    },
+    "/apple/verify": {
+      "post": {
+        "summary": "Verify Apple purchase",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/order"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/verifyapple"
+            }
+          },
+          "400": {
+            "description": "Parameters missing"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "order": {
+      "type": "object",
+      "properties": {
+        "receiptData": {
+          "type": "string"
+        }
+      }
+    },
+    "verifyapple": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "integer"
+        },
+        "receipt": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
