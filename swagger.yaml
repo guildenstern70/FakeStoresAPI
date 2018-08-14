@@ -43,7 +43,7 @@ paths:
       responses:
         '200':
           description: Success response
-          
+
         '400':
           description: Parameters missing
   /apple/verify:
@@ -70,7 +70,7 @@ definitions:
   order:
     type: "object"
     properties:
-      receiptData:
+      receipt-data:
         type: "string"
   verifyapple:
     type: "object"
@@ -79,4 +79,4 @@ definitions:
         type: "integer"
       receipt:
         type: "string"
-        
+
