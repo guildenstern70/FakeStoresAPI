@@ -14,9 +14,10 @@ router.get('/version', function (req, res) {
     res.send({version: "0.1.0"});
 });
 
-/* GET google verify.
-   Example:
-   GET /api/google/verify/applications/packageAlessio/purchases/products/00001/tokens/2180183832218021?access_token=38032
+/*
+    GET google verify.
+    Example:
+    GET /api/google/verify/applications/packageAlessio/purchases/products/00001/tokens/2180183832218021?access_token=38032
  */
 router.get('/google/verify/applications/:packagename/purchases/products/:productid/tokens/:token', function (req, res) {
 
@@ -71,11 +72,37 @@ router.get('/google/verify/applications/:packagename/purchases/products/:product
     res.send(googleResponse);
 });
 
-/* GET reports. */
-router.get('/apple/verify/', function (req, res) {
+
+/*
+    POST apple verify.
+    Example:
+    POST /api/apple/verify
+
+    Body: {
+        "receipt-data": base 64 of receipt
+    }
+
+ */
+router.post('/apple/verify', function(req, res) {
+
+    const receiptData = req.body["receipt-data"];
+
+    if (isEmpty(receiptData)) {
+        const msg = "Receipt Data is null or empty";
+        console.error(msg);
+        res.status(400).send(msg);
+        return;
+    }
+
+    console.log("Receipt Data = " + receiptData);
+
+    const appleResponse = {
+        "status": 0,
+        "receipt": receiptData
+    };
 
     res.setHeader('Content-Type', 'application/json');
-    res.send({"todo": true});
+    res.send(appleResponse);
 });
 
 
