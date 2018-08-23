@@ -1,7 +1,9 @@
 
-
+const cors = require('cors');
 const express = require('express');
 const router = express.Router();
+
+router.all('*', cors());
 
 function isEmpty(str) {
     return (!str || 0 === str.length);
