@@ -14,6 +14,7 @@ router.get('/version', function (req, res) {
 
     res.setHeader('Content-Type', 'application/json');
     res.send({version: "0.1.0"});
+
 });
 
 /*
@@ -21,7 +22,8 @@ router.get('/version', function (req, res) {
     Example:
     GET /api/google/verify/applications/packageAlessio/purchases/products/00001/tokens/2180183832218021?access_token=38032
  */
-router.get('/google/verify/applications/:packagename/purchases/products/:productid/tokens/:token', function (req, res) {
+router.get('/google/verify/applications/:packagename/purchases/products/:productid/tokens/:token',
+    function (req, res) {
 
     const accessToken = req.query.access_token;
 
@@ -98,9 +100,42 @@ router.post('/apple/verify', function(req, res) {
 
     console.log("Receipt Data = " + receiptData);
 
-    const appleResponse = {
+    const appleResponse =
+    {
+        "receipt": {
+            "receipt_type": "ProductionSandbox",
+            "adam_id": 0,
+            "app_item_id": 0,
+            "bundle_id": "com.artsana.BebeCare1",
+            "application_version": "1",
+            "download_id": 0,
+            "version_external_identifier": 0,
+            "receipt_creation_date": "2018-10-04 08:37:08 Etc/GMT",
+            "receipt_creation_date_ms": "1538642228000",
+            "receipt_creation_date_pst": "2018-10-04 01:37:08 America/Los_Angeles",
+            "request_date": "2018-10-04 13:07:58 Etc/GMT",
+            "request_date_ms": "1538658478144",
+            "request_date_pst": "2018-10-04 06:07:58 America/Los_Angeles",
+            "original_purchase_date": "2013-08-01 07:00:00 Etc/GMT",
+            "original_purchase_date_ms": "1375340400000",
+            "original_purchase_date_pst": "2013-08-01 00:00:00 America/Los_Angeles",
+            "original_application_version": "1.0",
+            "in_app": [{
+                "quantity": "1",
+                "product_id": "com.artsana.bebecare.25Alerts",
+                "transaction_id": "1000000452838655",
+                "original_transaction_id": "1000000452838655",
+                "purchase_date": "2018-10-04 08:37:07 Etc/GMT",
+                "purchase_date_ms": "1538642227000",
+                "purchase_date_pst": "2018-10-04 01:37:07 America/Los_Angeles",
+                "original_purchase_date": "2018-10-04 08:37:07 Etc/GMT",
+                "original_purchase_date_ms": "1538642227000",
+                "original_purchase_date_pst": "2018-10-04 01:37:07 America/Los_Angeles",
+                "is_trial_period": "false"
+            }]
+        },
         "status": 0,
-        "receipt": receiptData
+        "environment": "Sandbox"
     };
 
     res.setHeader('Content-Type', 'application/json');
