@@ -1,4 +1,8 @@
+---
 applications:
-- name: fakestoresapi
-  buildpack: nodejs_buildpack
-  memory: 256M
+  - buildpacks:
+      - nodejs_buildpack
+    routes:
+      - route: fakestoresapi.eu-de.mybluemix.net
+    name: fakestoresapi
+    memory: 256M
