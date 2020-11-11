@@ -1,3 +1,10 @@
+/*
+
+    IBM ARTSANA IOT PROJECT
+    FakeStores API for Validating Purchases
+
+*/
+
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');

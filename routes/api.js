@@ -78,6 +78,46 @@ router.get('/google/verify/applications/:packagename/purchases/products/:product
 
 
 /*
+    GET huawei verify.
+    Example:
+    GET /api/huawei/applications/purchases/tokens/verify
+ */
+router.post('/huawei/applications/purchases/tokens/verify', function(req, res) {
+
+    const purchaseToken = req.body["purchaseToken"];
+    const productId = req.body["productId"]
+
+    if (isEmpty(purchaseToken)) {
+        const msg = "purchaseToken is null or empty";
+        console.error(msg);
+        res.status(400).send(msg);
+        return;
+    }
+
+    if (isEmpty(productId)) {
+        const msg = "productId is null or empty";
+        console.error(msg);
+        res.status(400).send(msg);
+        return;
+    }
+
+    console.log("purchaseToken = " + purchaseToken);
+    console.log("productId = " + purchaseToken);
+
+    const huaweiResponse =
+        {
+            "responseCode": "0",
+            "responseMessage": "OK, verified",
+            "purchaseTokenData": purchaseToken,
+            "dataSignature": "11/11/2011",
+        };
+
+    res.setHeader('Content-Type', 'application/json');
+    res.send(huaweiResponse);
+});
+
+
+/*
     POST apple verify.
     Example:
     POST /api/apple/verify
