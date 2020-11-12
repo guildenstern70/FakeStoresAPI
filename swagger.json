@@ -98,9 +98,69 @@
           }
         }
       }
+    },
+    "/huawei/applications/purchases/tokens/verify": {
+      "post": {
+        "summary": "Verify Huawei purchase",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "huaweyToken",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/huaweyToken"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success response",
+            "schema": {
+              "$ref": "#/definitions/verifyHuawei"
+            }
+          },
+          "400": {
+            "description": "Parameters missing"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "huaweyToken": {
+      "type": "object",
+      "properties": {
+        "purchaseToken": {
+          "type": "string"
+        },
+        "productId": {
+          "type": "string"
+        }
+      }
+    },
+    "verifyHuawei": {
+      "type": "object",
+      "properties": {
+        "responseCode": {
+          "type": "string"
+        },
+        "responseMessage": {
+          "type": "string"
+        },
+        "purchaseTokenData": {
+          "type": "string"
+        },
+        "dataSignature": {
+          "type": "string"
+        }
+      }
+    },
     "order": {
       "type": "object",
       "properties": {
